@@ -1,8 +1,9 @@
-FROM ruby:2.4.0
+FROM ruby:2.4.1
 
-# skip installing gem documentation
+RUN gem update --system
 RUN echo 'install: --no-document\nupdate: --no-document' >> "$HOME/.gemrc"
-RUN gem install foreman --no-rdoc --no-ri
+RUN gem install sigar -- --with-cppflags="-fgnu89-inline"
+RUN gem install eye
 
 # Installing packages
 RUN apt-get update -qq
